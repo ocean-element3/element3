@@ -2,6 +2,7 @@ import LabelWrap from '../src/LabelWrap.vue'
 import { setupGlobalOptions } from '../../../composables/globalConfig'
 import { render, waitFor } from '@testing-library/vue'
 import { reactive } from 'vue'
+import { getElementComputedStyle } from '../src/use-label-warp'
 
 describe('LabelWrap.vue', () => {
   it('test was slot when the components property was slot', async () => {
@@ -48,4 +49,19 @@ describe('LabelWrap.vue', () => {
 
     expect(warpper.getByTestId('lable-warp')).toHaveAttribute('style')
   })
+
+  it('get width and height', () => {
+    const div = document.createElement('div')
+    div.style.width = '100px'
+    div.style.height = '100px'
+
+    document.body.appendChild(div)
+
+    const { width, height } = getElementComputedStyle(div)
+
+    expect(width).toEqual('100px')
+    expect(height).toEqual('100px')
+  })
+
+  it('get label auto lable width', () => {})
 })

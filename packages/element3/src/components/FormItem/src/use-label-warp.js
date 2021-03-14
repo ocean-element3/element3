@@ -11,3 +11,23 @@ export function useProvide() {
 
   return { style }
 }
+
+export function getElementComputedStyle(element) {
+  const { width, height } = window.getComputedStyle(element)
+  return {
+    width,
+    height
+  }
+}
+
+export function getLabelWidth(element) {
+  let computedWidth = 0
+  if (element && element.firstElementChild) {
+    const width = getElementComputedStyle(element.firstElementChild)[width]
+    computedWidth = Math.ceil(parseFloat(width))
+  }
+
+  return computedWidth
+}
+
+export function updateLabelWidth(element, width) {}
